@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleService } from './article.service';
 
 import { Article } from './../classes/Article';
+import { ArticleJsonInterface } from './../interface/ArticleJsonInterface';
 
 @Component({
   selector: 'article',
@@ -12,7 +13,7 @@ import { Article } from './../classes/Article';
 
 export class ArticleComponent implements OnInit {
   articleList: Article[] = [];
-  //article: Article;
+  article: ArticleJsonInterface;
 
   constructor(private articleS: ArticleService) { }
 
@@ -21,11 +22,9 @@ export class ArticleComponent implements OnInit {
   }
 
   getArticle(){
-    this.articleS.getArticle()
-                .subscribe(resp =>{
-                  console.log(typeof(resp));
-                  //this.article = new Article(resp.id, resp.author.id, resp.title, resp.string, resp.short_description)
-                });
+    this.articleS.getArticle().subscribe(resp => {
+                                          this.article = { ... resp.body };
+                                        });
   }
 
 }

@@ -4,7 +4,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { ArticleInterface } from './../interface/ArticleInterface';
+import { ArticleJsonInterface } from '../interface/ArticleJsonInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ArticleService {
 
   constructor(private http: HttpClient) { }
 
-  getArticle(): Observable<HttpResponse<ArticleInterface>>{
-    return this.http.get<ArticleInterface>('http://localhost:8000/articles/36', {'observe': 'response'});
+  getArticle(): Observable<HttpResponse<ArticleJsonInterface>>{
+    return this.http.get<ArticleJsonInterface>('http://localhost:8000/articles/36', {'observe': 'response'});
   }
 }

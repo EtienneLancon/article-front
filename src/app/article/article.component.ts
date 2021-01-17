@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArticleService } from './article.service';
 
 import { Article } from './../classes/Article';
-import { ArticleJsonInterface } from './../interface/ArticleJsonInterface';
+import { ArticleInterface } from '../interface/article.interface';
 
 @Component({
   selector: 'article',
@@ -12,19 +12,28 @@ import { ArticleJsonInterface } from './../interface/ArticleJsonInterface';
 })
 
 export class ArticleComponent implements OnInit {
-  articleList: Article[] = [];
-  article: ArticleJsonInterface;
+  articleList: ArticleInterface[] = [];
+  article!: ArticleInterface;
+  name!: string;
 
   constructor(private articleS: ArticleService) { }
 
   ngOnInit(): void {
-    this.getArticle();
+    this.getArticles();  
   }
 
-  getArticle(){
-    this.articleS.getArticle().subscribe(resp => {
-                                          this.article = { ... resp.body };
+  getArticles(): void{
+    this.articleS.getArticles().subscribe(response => {
+                                          response._embedded.items.forEach((elem: ArticleInterface) =>{
+                                            this.articleList.push(elem);
+                                          });
                                         });
+  }
+
+  getArticle(id: number): void{
+    this.articleS.getArticle(id).subscribe(response => {
+      this.article = response;
+    })
   }
 
 }

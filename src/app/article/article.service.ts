@@ -4,11 +4,13 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-import { ArticleJsonInterface } from '../interface/ArticleJsonInterface';
+import { ArticleInterface } from '../interface/article.interface';
+import { CollectionInterface } from '../interface/collection.interface';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ArticleService {
   headers: HttpHeaders = new HttpHeaders({
     'Access-Control-Allow-Origin': '*'
@@ -16,7 +18,11 @@ export class ArticleService {
 
   constructor(private http: HttpClient) { }
 
-  getArticle(): Observable<HttpResponse<ArticleJsonInterface>>{
-    return this.http.get<ArticleJsonInterface>('http://localhost:8000/articles/36', {'observe': 'response'});
+  getArticles(): Observable<CollectionInterface>{
+    return this.http.get<CollectionInterface>('http://localhost:8000/articles', {'observe': 'body'});
+  }
+
+  getArticle(id: number): Observable<ArticleInterface>{
+    return this.http.get<ArticleInterface>('http://localhost:8000/articles/'+id, {'observe': 'body'})
   }
 }

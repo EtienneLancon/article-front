@@ -1,1 +1,9 @@
-<p>{{this.article | json}}</p>
+
+<div *ngFor="let article of articleList">
+    <button (click)="getArticle(article.id)">{{article.title}}</button>
+</div>
+
+
+
+
+<div>{{this.article | json}}</div>

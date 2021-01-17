@@ -5,11 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArticleComponent } from './article/article.component';
+import { AuthorComponent } from './author/author.component';
+import { PagenotfoundComponent } from './util/pagenotfound/pagenotfound.component';
+import { HomeComponent } from './util/home/home.component';
+import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleComponent
+    ArticleComponent,
+    AuthorComponent,
+    PagenotfoundComponent,
+    HomeComponent,
+    ArticleDetailComponent
   ],
   imports: [
     BrowserModule,
